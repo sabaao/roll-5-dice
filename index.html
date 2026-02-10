@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新年擲骰子 🎲 骰出你的紅包金額！</title>
+
+  <!-- Open Graph 標籤，用於 Facebook 分享 -->
+  <meta property="og:title" content="🧧 新年擲骰子 — 骰出你的紅包金額！">
+  <meta property="og:description" content="🎊 恭賀新禧！來試試你的新年手氣，擲出五顆骰子決定你的紅包金額！新年快樂，萬事如意！🎊">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://em-content.zobj.net/source/apple/391/red-envelope_1f9e7.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧧</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <!-- html2canvas：用於截圖分享 -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <!-- 背景裝飾：燈籠 -->
+  <div class="lantern lantern-left">🏮</div>
+  <div class="lantern lantern-right">🏮</div>
+
+  <div class="container">
+    <header>
+      <h1>🧧 新年擲骰子 🧧</h1>
+      <p class="subtitle">骰出你的紅包金額！</p>
+    </header>
+
+    <!-- 五顆 3D 骰子區域 -->
+    <div class="dice-area" id="dice-area">
+      <div class="dice-wrapper" data-index="0">
+        <div class="place-label">萬</div>
+        <div class="dice-scene">
+          <div class="dice-cube" id="dice-0" data-index="0">
+            <div class="dice-face face-front"></div>
+            <div class="dice-face face-back"></div>
+            <div class="dice-face face-right"></div>
+            <div class="dice-face face-left"></div>
+            <div class="dice-face face-top"></div>
+            <div class="dice-face face-bottom"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dice-wrapper" data-index="1">
+        <div class="place-label">千</div>
+        <div class="dice-scene">
+          <div class="dice-cube" id="dice-1" data-index="1">
+            <div class="dice-face face-front"></div>
+            <div class="dice-face face-back"></div>
+            <div class="dice-face face-right"></div>
+            <div class="dice-face face-left"></div>
+            <div class="dice-face face-top"></div>
+            <div class="dice-face face-bottom"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dice-wrapper" data-index="2">
+        <div class="place-label">百</div>
+        <div class="dice-scene">
+          <div class="dice-cube" id="dice-2" data-index="2">
+            <div class="dice-face face-front"></div>
+            <div class="dice-face face-back"></div>
+            <div class="dice-face face-right"></div>
+            <div class="dice-face face-left"></div>
+            <div class="dice-face face-top"></div>
+            <div class="dice-face face-bottom"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dice-wrapper" data-index="3">
+        <div class="place-label">十</div>
+        <div class="dice-scene">
+          <div class="dice-cube" id="dice-3" data-index="3">
+            <div class="dice-face face-front"></div>
+            <div class="dice-face face-back"></div>
+            <div class="dice-face face-right"></div>
+            <div class="dice-face face-left"></div>
+            <div class="dice-face face-top"></div>
+            <div class="dice-face face-bottom"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dice-wrapper" data-index="4">
+        <div class="place-label">個</div>
+        <div class="dice-scene">
+          <div class="dice-cube" id="dice-4" data-index="4">
+            <div class="dice-face face-front"></div>
+            <div class="dice-face face-back"></div>
+            <div class="dice-face face-right"></div>
+            <div class="dice-face face-left"></div>
+            <div class="dice-face face-top"></div>
+            <div class="dice-face face-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示文字 -->
+    <p class="hint" id="hint">👆 點選任一顆骰子開始擲骰！</p>
+
+    <!-- 結果區域（隱藏，直到全部擲完） -->
+    <div class="result-area" id="result-area">
+      <!-- 用於截圖分享的卡片 -->
+      <div class="share-card" id="share-card">
+        <div class="share-card-bg">
+          <div class="fireworks">🎆 🎇 🎆</div>
+          <h2>🎉 恭喜發財！🎉</h2>
+          <p class="cny-greeting">新年快樂 萬事如意</p>
+          <p class="amount">你的紅包金額是</p>
+          <p class="amount-value" id="amount-value">$0</p>
+          <div class="share-dice-result" id="share-dice-result"></div>
+          <p class="share-footer">🧧 新年擲骰子 🧧</p>
+        </div>
+      </div>
+      <div class="result-buttons">
+        <button class="btn btn-share" id="btn-share">
+          📘 分享到 Facebook
+        </button>
+        <button class="btn btn-download" id="btn-download">
+          📷 下載截圖
+        </button>
+        <button class="btn btn-restart" id="btn-restart">
+          🔄 再玩一次
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部裝飾 -->
+  <div class="footer-decor">
+    <span>🧨</span>
+    <span>🎊</span>
+    <span>🧨</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
