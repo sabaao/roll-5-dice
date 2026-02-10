@@ -38,9 +38,21 @@
 - **JavaScript (ES6)** — 遊戲邏輯、requestAnimationFrame 動畫、Web Share API
 - **html2canvas** — 截圖功能（CDN 引入）
 
-## 🚀 部署方式（Cloudflare Pages）
+## 🚀 部署方式（Cloudflare Workers）
 
-本專案使用 [Cloudflare Pages](https://pages.cloudflare.com/) 部署，完全免費。
+本專案使用 [Cloudflare Workers](https://workers.cloudflare.com/) 以靜態資源方式部署，完全免費。
+
+專案包含 `wrangler.jsonc` 設定檔，透過 `assets` 指定靜態資源目錄：
+
+```jsonc
+{
+  "name": "roll-5-dice",
+  "compatibility_date": "2026-02-10",
+  "assets": {
+    "directory": "./"
+  }
+}
+```
 
 ### 前置準備
 
@@ -58,8 +70,8 @@
    - **專案名稱**：`roll-5-dice`（會產生 `roll-5-dice.pages.dev` 網址）
    - **Production branch**：`main`
    - **Framework preset**：`None`
-   - **建置指令（Build command）**：留空
-   - **建置輸出目錄（Build output directory）**：`/`（根目錄）
+   - **建置指令（Build command）**：`npx wrangler deploy`
+   - **建置輸出目錄（Build output directory）**：留空
 7. 點選 **Save and Deploy**
 
 ### 自訂網域（選用）
@@ -71,16 +83,17 @@
 
 ### 自動部署
 
-設定完成後，每次 push 到 `main` 分支，Cloudflare Pages 會自動重新部署。
+設定完成後，每次 push 到 `main` 分支，Cloudflare 會自動重新部署。
 
 ## 📁 專案結構
 
 ```
 roll-5-dice/
-├── index.html    # 主頁面（含 3D 骰子結構）
-├── style.css     # 樣式表（3D 骰子、過年風格、RWD）
-├── script.js     # 遊戲邏輯（動畫、截圖、分享）
-└── README.md     # 專案說明
+├── index.html      # 主頁面（含 3D 骰子結構）
+├── style.css       # 樣式表（3D 骰子、過年風格、RWD）
+├── script.js       # 遊戲邏輯（動畫、截圖、分享）
+├── wrangler.jsonc  # Cloudflare Workers 部署設定
+└── README.md       # 專案說明
 ```
 
 ## 📱 響應式設計
